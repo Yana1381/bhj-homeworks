@@ -10,5 +10,8 @@ const timerFunc = function(){
 setInterval(timerFunc, 1000);
 
 let intervalID = setInterval(timerFunc, 1000);
-clearInterval(intervalID);
+function myStopFunction() {
+	clearInterval(intervalID);
+}
+
 
