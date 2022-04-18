@@ -1,27 +1,27 @@
-const menuItem = document.getElementsByClassName('menu__item');
-const menuLink = document.getElementsByClassName('menu__link');
+
 const subMenu = document.getElementsByClassName('menu_sub');
-const LinkArr = Array.from(menuLink);
 
-
-
-for (let i = 0; i < subMenu.length; i++){
-		if (subMenu[i].closest(.menu__link) !== null){
-			return parentSubEl.querySelector(.menu__link);
+for (let i = 0; i < subMenu.length; i++) {
+	const li = subMenu[i].closest(".menu__item");
+	const link = li.querySelector("a");
+	if (link !== null) {
+		link.onclick = function () {
+			const parentLi = this.closest(".menu__item");
+			const menuSub = parentLi.querySelector(".menu_sub");
+			if (menuSub !== null) {
+				if (menuSub.classList.contains("menu_active") === true) {
+					menuSub.classList.remove("menu_active");
+				} else {
+					menuSub.classList.add("menu_active");
+				}
+			}
+			return false;
 		}
+	}
 }
 
 
 	
 	
-/*  for (let i = 0; i < menuLink.length; i++) {
-	 
-	 menuLink[i].onclick = function() {
-		//let parentLink = menuLink.closest(".menu__link");
-			if (menuItem[i].querySelector('.menu_sub') !== null && parentLink[i].classList.contain('menu__link')) {
-			
-		}
-	}
-} */
-	
+
 	
