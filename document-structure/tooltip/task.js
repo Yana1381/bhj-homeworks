@@ -1,17 +1,23 @@
-const ArrayToolTips = Array.from(document.getElementsByClassName("has-tooltip"));
+const arrayToolTips = Array.from(
+  document.getElementsByClassName("has-tooltip")
+);
 const tipDiv = document.createElement("div");
 
-tipDiv.classList.add('tooltip');
+tipDiv.classList.add("tooltip");
+document.body.appendChild(tipDiv);
 
-for (let i = 0; i < ArrayToolTips.length; i++) {
-	ArrayToolTips[i].insertAdjacentHTML("afterEnd",tipDiv);
-};
+function click(e) {
+  e.preventDefault();
+  const target = e.target;
 
-function Click(e) {
-	e.preventDefault();
-	tipDiv.classList.toggle('tooltip_active');
+  tipDiv.innerText = target.title;
+
+  tipDiv.style.left = target.offsetLeft + "px";
+  tipDiv.style.top = target.offsetTop + target.offsetHeight + "px";
+
+  tipDiv.classList.toggle("tooltip_active");
 }
 
-for (let index of ArrayToolTips) {
-    index.addEventListener('click', Click);
-};
+for (let index of arrayToolTips) {
+  index.addEventListener("click", click);
+}

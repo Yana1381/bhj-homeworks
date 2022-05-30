@@ -1,20 +1,41 @@
-const taskInput = document.getElementById('task__input');
-const tasksList = document.getElementById('tasks__list');
-const tasksAdd = document.getElementById('tasks__add');
+const taskInput = document.getElementById("task__input");
+const tasksList = document.getElementById("tasks__list");
+const tasksAdd = document.getElementById("tasks__add");
 
-function createElement() {
-    tasksList.insertAdjacentHTML('beforeend','<div class="task"> <div class="task__title"></div> <a href="#" class="task__remove">&times;</a> </div>');
-};
+function createElement(todoText) {
+  if (todoText !== "") {
+    tasksList.insertAdjacentHTML(
+      "beforeend",
+      `<div class="task"> <div class="task__title">${todoText}</div> <a href="#" class="task__remove">&times;</a> </div>`
+    );
+  }
+}
+function addListener() {
+  arrayRemoveButtons = Array.from(
+    tasksList.getElementsByClassName("task__remove")
+  );
+  const lastIndex = arrayRemoveButtons.length - 1;
 
-function pressButton() {
-    
-};
+  arrayRemoveButtons[lastIndex].addEventListener("click", remove);
+}
 
-function pressEnter(e) {
-    if (e.key === 'Enter') {
-        pressButton;
-    };
-};
+function remove(e) {
+  e.preventDefault();
+  const target = e.target;
+  const parentDiv = target.closest(".task");
 
-tasksAdd.addEventListener('click', pressButton);
-taskInput.addEventListener('keyup', pressEnter);
+  parentDiv.remove();
+}
+
+function pressButton(e) {
+  e.preventDefault();
+
+  const text = taskInput.value.trim();
+  if (text !== "") {
+    createElement(taskInput.value.trim());
+    addListener();
+  }
+  taskInput.value = "";
+}
+
+tasksAdd.addEventListener("click", pressButton);
