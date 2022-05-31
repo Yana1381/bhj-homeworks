@@ -8,12 +8,12 @@ function createElement(todoText) {
       "beforeend",
       `<div class="task"> <div class="task__title">${todoText}</div> <a href="#" class="task__remove">&times;</a> </div>`
     );
+    addListener();
   }
 }
+
 function addListener() {
-  arrayRemoveButtons = Array.from(
-    tasksList.getElementsByClassName("task__remove")
-  );
+  arrayRemoveButtons = Array.from(tasksList.getElementsByClassName("task__remove"));
   const lastIndex = arrayRemoveButtons.length - 1;
 
   arrayRemoveButtons[lastIndex].addEventListener("click", remove);
@@ -31,10 +31,8 @@ function pressButton(e) {
   e.preventDefault();
 
   const text = taskInput.value.trim();
-  if (text !== "") {
-    createElement(taskInput.value.trim());
-    addListener();
-  }
+  createElement(text);
+
   taskInput.value = "";
 }
 
